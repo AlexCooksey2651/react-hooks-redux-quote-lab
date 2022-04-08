@@ -1,22 +1,45 @@
 import React, { useState } from "react";
 import { v4 as uuid } from "uuid";
+import { useDispatch } from "react-redux"
 import { addQuote } from "./quotesSlice";
 
 function QuoteForm() {
   const [formData, setFormData] = useState({
     // set up a controlled form with internal state
+    content: "",
+    author: ""
     // look at the form to determine what keys need to go here
   });
 
   function handleChange(event) {
     // Handle Updating Component State
+    const name = event.target.id
+    const value = event.target.value
+    setFormData({
+      ...formData, 
+      [name]: value,
+    })
   }
+
+  const dispatch = useDispatch()
 
   function handleSubmit(event) {
     // Handle Form Submit event default
+    event.preventDefault()
     // Create quote object from state
+    const newQuote = {
+      ...formData,
+      id: uuid(), 
+      votes: 0
+    }
     // Pass quote object to action creator
+    console.log(newQuote)
+    dispatch(addQuote(newQuote))
     // Update component state to return to default state
+    setFormData({
+      content: "",
+      author: ""
+    }) 
   }
 
   return (
@@ -35,6 +58,7 @@ function QuoteForm() {
                       className="form-control"
                       id="content"
                       value={formData.content}
+                      onChange={(event) => handleChange(event)}
                     />
                   </div>
                 </div>
@@ -48,12 +72,13 @@ function QuoteForm() {
                       type="text"
                       id="author"
                       value={formData.author}
+                      onChange={(event) => handleChange(event)}
                     />
                   </div>
                 </div>
                 <div className="form-group">
                   <div className="col-md-6 col-md-offset-4">
-                    <button type="submit" className="btn btn-default">
+                    <button type="submit" className="btn btn-default" onSubmit={handleSubmit}>
                       Add
                     </button>
                   </div>
