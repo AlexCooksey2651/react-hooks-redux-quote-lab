@@ -19,13 +19,13 @@ function QuoteCard({quote, deleteQuote, upvote, downvote}) {
             role="group"
             aria-label="Basic example"
           >
-            <button type="button" className="btn btn-primary" onClick={(quote) => upvote(quote)}>
+            <button type="button" className="btn btn-primary" onClick={() => upvote(quote)}>
               Upvote
             </button>
-            <button type="button" className="btn btn-secondary" onClick={(quote) => downvote(quote)}>
+            <button type="button" className="btn btn-secondary" onClick={() => downvote(quote)}>
               Downvote
             </button>
-            <button type="button" className="btn btn-danger" onClick={(quote) => deleteQuote(quote)}>
+            <button type="button" className="btn btn-danger" onClick={() => deleteQuote(quote)}>
               <span aria-hidden="true">&times;</span>
             </button>
           </div>

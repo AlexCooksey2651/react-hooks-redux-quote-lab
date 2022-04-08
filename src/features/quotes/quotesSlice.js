@@ -1,6 +1,7 @@
 import { v4 as uuid } from "uuid";
 
-const id = uuid();// Action Creators
+const id = uuid();
+// Action Creators
 // TODO: Create action creators as defined in tests
 export const addQuote = (quote) => {
   return { type: "quotes/add", payload: quote }
@@ -19,7 +20,7 @@ export const downvoteQuote = (quoteId) => {
 } 
 
 // Reducer
-const initialState = []
+const initialState = [{id: 1, content: "I love Cheese", author: "Alex", votes: 5}]
 
 export default function quotesReducer(state = initialState, action) {
   switch (action.type) {
@@ -29,19 +30,25 @@ export default function quotesReducer(state = initialState, action) {
     case "quotes/remove":
       return state.filter((quote) => quote.id !== action.payload)
     
-    // case "quotes/upvote":
-    //   return state.filter(quote => {
-    //     if (quote.id === action.payload) {
-    //       quote.votes = quote.votes += 1
-    //     }
-    //   })
+    case "quotes/upvote":
+      const upvote = state.map(quote => {
+        if (quote.id === action.payload) {
+          return {...quote, votes: parseInt(quote.votes) + 1}
+        } else {
+          return quote
+        }
+      })
+      return upvote
     
-    // case "quotes/downvote":
-    //   return state.filter(quote => {
-    //     if (quote.id === action.payload) {
-    //       quote.votes = quote.votes -= 1
-    //     }
-    //   })
+    case "quotes/downvote":
+      const downvote = state.map(quote => {
+        if (quote.id === action.payload) {
+          return {...quote, votes: parseInt(quote.votes) - 1}
+        } else {
+          return quote
+        }
+      })
+      return downvote
 
     default:
       return state;

@@ -24,17 +24,14 @@ function QuoteForm() {
   const dispatch = useDispatch()
 
   function handleSubmit(event) {
-    // Handle Form Submit event default
-    event.preventDefault()
-    // Create quote object from state
+    event.preventDefault();
     const newQuote = {
       ...formData,
       id: uuid(), 
       votes: 0
     }
-    console.log(formData)
-    // Pass quote object to action creator
     console.log(newQuote)
+    // Pass quote object to action creator
     dispatch(addQuote(newQuote))
     // Update component state to return to default state
     setFormData({
@@ -49,7 +46,7 @@ function QuoteForm() {
         <div className="col-md-8 col-md-offset-2">
           <div className="panel panel-default">
             <div className="panel-body">
-              <form className="form-horizontal">
+              <form className="form-horizontal" onSubmit={handleSubmit}>
                 <div className="form-group">
                   <label htmlFor="content" className="col-md-4 control-label">
                     Quote
@@ -79,7 +76,7 @@ function QuoteForm() {
                 </div>
                 <div className="form-group">
                   <div className="col-md-6 col-md-offset-4">
-                    <button type="submit" className="btn btn-default" onSubmit={handleSubmit}>
+                    <button type="submit" className="btn btn-default" >
                       Add
                     </button>
                   </div>
