@@ -32,6 +32,7 @@ function QuoteForm() {
       id: uuid(), 
       votes: 0
     }
+    console.log(formData)
     // Pass quote object to action creator
     console.log(newQuote)
     dispatch(addQuote(newQuote))

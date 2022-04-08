@@ -4,9 +4,7 @@ import { removeQuote, upvoteQuote, downvoteQuote } from "./quotesSlice";
 import QuoteCard from "./QuoteCard";
 
 function Quotes() {
-  const quotes = useSelector((state) => {
-    return state.quotes
-  })
+  const quotes = useSelector((state) => state.quotes)
 
   const dispatch = useDispatch()
 
@@ -32,9 +30,9 @@ function Quotes() {
       <div className="container">
         <div className="row">
           <div className="col-md-4">
-            {quotes ? quotes.map(quote => {
-              return <QuoteCard quote={quote} key={quote.id} deleteQuote={deleteQuote} upvote={upvote} downvote={downvote}/>
-            }) : null }
+            {quotes.map(quote => {
+              return <QuoteCard quote={quote} key={quote.id} deleteQuote={deleteQuote} upvote={upvote} downvote={downvote} />
+            })}
           </div>
         </div>
       </div>

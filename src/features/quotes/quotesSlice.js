@@ -27,21 +27,22 @@ export default function quotesReducer(state = initialState, action) {
       return [...state, action.payload]
     
     case "quotes/remove":
-      return state.filter((quote) => quote.id !== action.payload.id)
+      return state.filter((quote) => quote.id !== action.payload)
     
-    case "quotes/upvote":
-      return state.filter(quote => {
-        if (quote.id === action.payload) {
-          quote.votes = quote.votes += 1
-        }
-      })
+    // case "quotes/upvote":
+    //   return state.filter(quote => {
+    //     if (quote.id === action.payload) {
+    //       quote.votes = quote.votes += 1
+    //     }
+    //   })
     
-    case "quotes/downvote":
-      return state.filter(quote => {
-        if (quote.id === action.payload) {
-          quote.votes = quote.votes -= 1
-        }
-      })
+    // case "quotes/downvote":
+    //   return state.filter(quote => {
+    //     if (quote.id === action.payload) {
+    //       quote.votes = quote.votes -= 1
+    //     }
+    //   })
+
     default:
       return state;
   }  
